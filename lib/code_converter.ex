@@ -791,12 +791,12 @@ defmodule CountryCodeConverter do
 
   """
   @spec convert(code(), binary()) :: {:ok, res()} | {:error, binary()}
-  def convert(:iso2, code), do: do_covert(@iso2, code, [:ioc, :iso3, :iso2])
-  def convert(:iso3, code), do: do_covert(@iso3, code, [:ioc, :iso2, :iso3])
-  def convert(:ioc, code), do: do_covert(@ioc, code, [:iso2, :iso3, :ioc])
+  def convert(:iso2, code), do: do_convert(@iso2, code, [:ioc, :iso3, :iso2])
+  def convert(:iso3, code), do: do_convert(@iso3, code, [:ioc, :iso2, :iso3])
+  def convert(:ioc, code), do: do_convert(@ioc, code, [:iso2, :iso3, :ioc])
   def convert(iso, _), do: {:error, "unknown country iso code type: #{iso}"}
 
-  defp do_covert(m, code, codes) do
+  defp do_convert(m, code, codes) do
     case Map.get(m, code) do
       nil ->
         {:error, "uknown country code #{code}"}
